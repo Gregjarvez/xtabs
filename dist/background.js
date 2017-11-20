@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 90);
+/******/ 	return __webpack_require__(__webpack_require__.s = 101);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -3465,7 +3465,18 @@ exports.default = function (aliases) {
 /* 87 */,
 /* 88 */,
 /* 89 */,
-/* 90 */
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3484,26 +3495,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */])(__WEBPACK_IMPORTED_MODULE_2__reducers__["a" /* default */], Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(__WEBPACK_IMPORTED_MODULE_3__middleware__["a" /* default */]));
 
+new __WEBPACK_IMPORTED_MODULE_4__scripts__["a" /* default */](store);
+
 Object(__WEBPACK_IMPORTED_MODULE_1_react_chrome_redux__["wrapStore"])(store, {
   portName: 'stackTabs'
 });
 
-var app = new __WEBPACK_IMPORTED_MODULE_4__scripts__["a" /* default */]();
-
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
 /* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3648,10 +3648,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 
-var App = function App() {
+var App = function App(store) {
   _classCallCheck(this, App);
 
-  this.events = new __WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]();
+  this.events = new __WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */](store);
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (App);
@@ -3661,26 +3661,24 @@ var App = function App() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events_background__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__events_actions_index__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events_actions_index__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(110);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* globals chrome */
 
 
 
-
 var IOEvent = function () {
-  function IOEvent() {
+  function IOEvent(store) {
     var _this = this;
 
     _classCallCheck(this, IOEvent);
 
     this.closeOneOnExcess = function (tabs) {
-      if (tabs.length >= _this.limit) {
-        var tabInfo = Object(__WEBPACK_IMPORTED_MODULE_2__utils__["a" /* extract */])(['id', 'url', 'title', 'favIconUrl'], tabs[0]);
-        __WEBPACK_IMPORTED_MODULE_0__events_background__["default"].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__events_actions_index__["b" /* saveTabs */])(tabInfo));
+      if (tabs.length > _this.limit) {
+        var tabInfo = Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* extract */])(['id', 'url', 'title', 'favIconUrl'], tabs[0]);
+        _this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_0__events_actions_index__["b" /* saveTabs */])(tabInfo));
         chrome.tabs.remove(tabInfo.id);
       }
     };
@@ -3703,24 +3701,25 @@ var IOEvent = function () {
         var ids = tabinfo.length > 1 ? tabinfo.map(function (tab) {
           return tab.id;
         }) : tabinfo[0].id;
-        __WEBPACK_IMPORTED_MODULE_0__events_background__["default"].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__events_actions_index__["b" /* saveTabs */])(tabinfo));
+        _this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_0__events_actions_index__["b" /* saveTabs */])(tabinfo));
         chrome.tabs.remove(ids);
       }
     };
 
     this.handleChange = function () {
-      var val = __WEBPACK_IMPORTED_MODULE_0__events_background__["default"].getState().tabLimit;
+      var val = _this.store.getState().tabLimit;
       if (_this.limit === val) return;
       _this.limit = val;
+
+      _this.queryTab(_this.closeMultipleOnExcess);
     };
 
     this.limit = 6;
+    this.store = store;
 
     this.queryTab(this.closeMultipleOnExcess);
     this.onTabCreate();
-    if (__WEBPACK_IMPORTED_MODULE_0__events_background__["default"]) {
-      __WEBPACK_IMPORTED_MODULE_0__events_background__["default"].subscribe(this.handleChange);
-    }
+    this.store.subscribe(this.handleChange);
   }
 
   IOEvent.prototype.onTabCreate = function onTabCreate() {
