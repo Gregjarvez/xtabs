@@ -1,8 +1,8 @@
 import IOEvents from './events';
 
 class App {
-  constructor() {
-    this.events = new IOEvents();
+  constructor(store) {
+    this.events = new IOEvents(store);
   }
 }
 

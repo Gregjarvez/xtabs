@@ -1,17 +1,15 @@
 /* globals chrome */
-import store from '../events/background';
 import { saveTabs } from '../events/actions/index';
 import { extract } from './utils';
 
 class IOEvent {
-  constructor() {
+  constructor(store) {
     this.limit = 6;
+    this.store = store;
 
     this.queryTab(this.closeMultipleOnExcess);
     this.onTabCreate();
-    if (store) {
-      store.subscribe(this.handleChange);
-    }
+    this.store.subscribe(this.handleChange);
   }
 
   onTabCreate() {
@@ -30,7 +28,7 @@ class IOEvent {
         ['id', 'url', 'title', 'favIconUrl'],
         tabs[0],
       );
-      store.dispatch(saveTabs(tabInfo));
+      this.store.dispatch(saveTabs(tabInfo));
       chrome.tabs.remove(tabInfo.id);
     }
   }
@@ -50,15 +48,17 @@ class IOEvent {
       const ids = tabinfo.length > 1
         ? tabinfo.map(tab => tab.id)
         : tabinfo[0].id;
-      store.dispatch(saveTabs(tabinfo));
+      this.store.dispatch(saveTabs(tabinfo));
       chrome.tabs.remove(ids);
     }
   }
 
   handleChange = () => {
-    const val = store.getState().tabLimit;
+    const val = this.store.getState().tabLimit;
     if (this.limit === val) return;
     this.limit = val;
+
+    this.queryTab(this.closeMultipleOnExcess);
   }
 }
 
