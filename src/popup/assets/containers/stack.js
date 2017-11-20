@@ -17,13 +17,14 @@ class Stack extends Component {
       .includes(word);
   }
 
-  populate = ({ url, title, id }) => {
+  populate = ({ url, title, id, favIconUrl }) => {
     return (
       <TabItem
         key={id}
         id={id}
         url={url}
         title={title}
+        favIconUrl={favIconUrl}
       />
     );
   }

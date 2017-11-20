@@ -23503,13 +23503,15 @@ var Stack = function (_Component) {
     _this.populate = function (_ref) {
       var url = _ref.url,
           title = _ref.title,
-          id = _ref.id;
+          id = _ref.id,
+          favIconUrl = _ref.favIconUrl;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_tabItem__["a" /* default */], {
         key: id,
         id: id,
         url: url,
-        title: title
+        title: title,
+        favIconUrl: favIconUrl
       });
     };
 
@@ -23563,8 +23565,8 @@ var Tab = function Tab(_ref) {
     'li',
     null,
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
-      null,
+      'h3',
+      { className: 'webTitle' },
       title
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -23572,16 +23574,16 @@ var Tab = function Tab(_ref) {
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'a',
-        { href: url, target: '_blank' },
+        { href: url, target: '_blank', className: 'webLink' },
         url.slice(0, 15).concat('...')
       )
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'button',
-      { onClick: function onClick() {
+      { className: 'removeBtn', onClick: function onClick() {
           return removeTab(id);
         } },
-      'delete'
+      'X'
     )
   );
 };

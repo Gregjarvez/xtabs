@@ -7,11 +7,12 @@ const Tab = ({
 }) => {
   return (
     <li>
-      <div>{ title }</div>
+      <h3 className="webTitle">{ title }</h3>
+      {/* <p> { favIconUrl } </p> */}
       <div>
-        <a href={url} target="_blank">{url.slice(0, 15).concat('...')}</a>
+        <a href={url} target="_blank" className="webLink">{url.slice(0, 15).concat('...')}</a>
       </div>
-      <button onClick={() => removeTab(id)}>delete</button>
+      <button className="removeBtn" onClick={() => removeTab(id)}>X</button>
     </li>
   );
 };

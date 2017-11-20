@@ -24,3 +24,9 @@ App
   -settings
     - settings button
     - tab count component
+
+
+tabItem
+    - Link Title - [webTitle]
+    - Link = [webLink]
+    - Remove Button - [removeBtn]
