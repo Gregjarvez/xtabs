@@ -23,7 +23,7 @@ class IOEvent {
   }
 
   closeOneOnExcess = (tabs) => {
-    if (tabs.length >= this.limit) {
+    if (tabs.length > this.limit) {
       const tabInfo = extract(
         ['id', 'url', 'title', 'favIconUrl'],
         tabs[0],

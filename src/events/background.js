@@ -9,7 +9,7 @@ const store = createStore(
   applyMiddleware(logger)
 );
 
-const app = new App(store);
+new App(store);
 
 wrapStore(store, {
   portName: 'stackTabs'

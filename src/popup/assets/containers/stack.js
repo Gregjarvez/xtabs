@@ -8,7 +8,7 @@ class Stack extends Component {
     super(props);
   }
 
-  includesSearchWord(tab) {
+  includesSearchWord = (tab) => {
     const word = this.props.searchWord.toLowerCase();
     if (!this.props.searchWord.length) {
       return tab;
@@ -17,7 +17,7 @@ class Stack extends Component {
       .includes(word);
   }
 
-  populate({ url, title, id }) {
+  populate = ({ url, title, id }) => {
     return (
       <TabItem
         key={id}
@@ -35,8 +35,8 @@ class Stack extends Component {
           {
               this.props.tabs &&
               this.props.tabs
-                  .filter(this.includesSearchWord, this)
-                  .map(this.populate, this)
+                  .filter(this.includesSearchWord)
+                  .map(this.populate)
             }
         </ul>
       </div>

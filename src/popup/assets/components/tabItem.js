@@ -9,7 +9,7 @@ const Tab = ({
     <li>
       <div>{ title }</div>
       <div>
-        <a href={url}>{url.slice(0, 15).concat('...')}</a>
+        <a href={url} target="_blank">{url.slice(0, 15).concat('...')}</a>
       </div>
       <button onClick={() => removeTab(id)}>delete</button>
     </li>
