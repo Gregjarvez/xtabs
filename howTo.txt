@@ -1,4 +1,8 @@
 - install dependencies
+
+    npm watch
+
+
 - open chrome go to this url chrome://extension
 - check the developer mode checkbox
 - click upload unpacked extension
@@ -6,8 +10,7 @@
 
 if you dont get any errors it should be loaded in nicely and easy.
 
-- go to src/popup
-- go interface lives here.
+- go to src/popup.... interface lives here.
 - write the styles in dist/style.css directly
 - lol lets right some modular css so I can play around with it too lol
 - click reload to see changes after applying
