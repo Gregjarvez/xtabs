@@ -3,6 +3,10 @@ html, div, ul, body {
     margin: 0;
 }
 
+*{
+    box-sizing: border-box
+}
+
 .app {
     padding: 0;
     margin: 0;
@@ -17,11 +21,40 @@ html, div, ul, body {
     height: 300px;
     overflow-y: scroll;
     overflow-x: hidden;
-    background: #2C3E50;
+    background: #2c3e50;
 }
 
+/*  Scrollbar Styling */
+
+
+
+.container::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.container::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.container::-webkit-scrollbar-thumb
+{
+	background-color: #0ae;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
+}
+
+
+
+/*  Scrollbar Styling End */
+
+
 .searchField {
-    flex-basic: 20%;
+    flex-basis: 20%;
     width: 100%;
     padding: 10px;
     margin: 0 auto;
@@ -32,9 +65,13 @@ html, div, ul, body {
 .searchField input {
     outline: none;
     display: block;
-    width: 60%;
-    padding: 5px;
+    width: 80%;
+    padding: 6px;
     margin: 0 auto;
+    border-radius: 20px;
+    border: 1.2px solid #19B5FE;
+    color: #19B5FE;
+    background: none;
 }
 
 .stack {
