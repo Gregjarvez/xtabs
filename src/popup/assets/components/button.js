@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Button = ({ title, onclick }) => {
+const Button = ({ title, onclick, classnameBtn }) => {
   return (
-    <span>
-      <button onClick={onclick}>{title}</button>
-    </span>
+      <button onClick={onclick} className={classnameBtn}>{title}</button>
+
   );
 };
 export default Button;

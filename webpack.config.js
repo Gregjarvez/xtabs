@@ -14,7 +14,7 @@ const config = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
   },
   stats: {
     colors: true,
@@ -31,6 +31,10 @@ const config = {
       {
         test: /\.html$/,
         loader: 'html-loader',
+      },
+      {
+        test: /\.css$/,
+        loader: 'css-loader',
       },
     ],
   }

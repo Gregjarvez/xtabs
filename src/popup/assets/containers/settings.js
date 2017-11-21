@@ -29,20 +29,21 @@ class Setting extends Component {
 
   render() {
     return (
-      <div className="setting">
+      <div>
         {
           !this.state.visible &&
           <Button
+            classnameBtn="settingBtn"
             title="Setting"
             onclick={this.limitVisibility}
           />
         }
         {
           this.state.visible &&
-          <div>
-            <Button title="<" onclick={this.decrement} />
-            <span>{this.props.tabLimit}</span>
-            <Button title=">" onclick={this.increment} />
+          <div className="limitBtns">
+            <Button classnameBtn="limitBtn" title="<" onclick={this.decrement} />
+            <span className="limitCounter">{this.props.tabLimit}</span>
+            <Button classnameBtn="limitBtn" title=">" onclick={this.increment} />
           </div>
         }
       </div>
