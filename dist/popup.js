@@ -28222,14 +28222,14 @@ var Setting = function (_Component) {
       }),
       this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], { title: '<', onclick: this.decrement }),
+        { className: 'limitBtns' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], { classnameBtn: 'limitBtn', title: '<', onclick: this.decrement }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'span',
-          null,
+          { className: 'limitCounter' },
           this.props.tabLimit
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], { title: '>', onclick: this.increment })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], { classnameBtn: 'limitBtn', title: '>', onclick: this.increment })
       )
     );
   };

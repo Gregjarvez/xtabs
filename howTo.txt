@@ -34,3 +34,5 @@ tabItem
     - Remove Button - [removeBtn]
     - Icon .icon(wrapper)
     - Setting Btn [settingBtn]
+    - Limit Btn [limitBtn]
+    - Limit Counter [limitCounter]
