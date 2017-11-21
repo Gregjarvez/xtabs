@@ -32,4 +32,5 @@ tabItem
     - Link Title - [webTitle]
     - Link = [webLink]
     - Remove Button - [removeBtn]
-    - Icon .icon
+    - Icon .icon(wrapper)
+    - Setting Btn [settingBtn]

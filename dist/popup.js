@@ -28214,8 +28214,9 @@ var Setting = function (_Component) {
   Setting.prototype.render = function render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
-      { className: 'setting' },
+      null,
       !this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], {
+        classnameBtn: 'settingBtn',
         title: 'Setting',
         onclick: this.limitVisibility
       }),
@@ -28262,16 +28263,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var Button = function Button(_ref) {
   var title = _ref.title,
-      onclick = _ref.onclick;
+      onclick = _ref.onclick,
+      classnameBtn = _ref.classnameBtn;
 
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'span',
-    null,
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'button',
-      { onClick: onclick },
-      title
-    )
+    'button',
+    { onClick: onclick, className: classnameBtn },
+    title
   );
 };
 /* harmony default export */ __webpack_exports__["a"] = (Button);

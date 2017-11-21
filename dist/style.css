@@ -1,4 +1,4 @@
-html, div, ul, body, h3 {
+html, div, ul, body, h3, .app, button {
     padding: 0;
     margin: 0;
 }
@@ -7,14 +7,10 @@ html, div, ul, body, h3 {
     box-sizing: border-box
 }
 
-.app {
-    padding: 0;
-    margin: 0;
-}
-
 .container {
     display: flex;
     flex-direction: column;
+    position: relative;
     margin: 0;
     padding: 0;
     width: 300px;
@@ -80,13 +76,13 @@ html, div, ul, body, h3 {
     text-align: center
 }
 
-.setting {
+/* .setting {
     flex-basis: 20%;
-    background: peachpuff;
+    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* Tab Item */
 
@@ -127,4 +123,25 @@ a{
 .icon{
     cursor: pointer;
     float: right;
+}
+
+button{
+    cursor: pointer;
+}
+
+.settingBtn{
+    color: #10D2E5;
+    background: none;
+    border: none;
+    padding: 12px 45px;
+    display: block;
+    margin: 10px auto;
+    border: 1px solid #10D2E5;
+    border-radius: 20px;
+    transition: background .2s; 
+}
+
+.settingBtn:hover{
+    background-color: #10D2E5;
+    color: #2c3e50;
 }
