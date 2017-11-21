@@ -24980,7 +24980,7 @@ var Tab = function Tab(_ref) {
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'h3',
       { className: 'webTitle' },
-      title
+      title.slice(0, 28)
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -24988,12 +24988,19 @@ var Tab = function Tab(_ref) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'a',
         { href: url, target: '_blank', className: 'webLink' },
-        url.slice(0, 15).concat('...')
+        url.slice(0, 25).concat('...'),
+        ' ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_ionicons___default.a, { icon: 'ios-open', rotate: true, fontSize: '16px', color: '#10D2E5' }),
+        ' '
       )
     ),
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_ionicons___default.a, { icon: 'ios-add-circle', fontSize: '35px', onClick: function onClick() {
-        return removeTab(id);
-      } })
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'icon' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_ionicons___default.a, { icon: 'ios-close-circle', rotate: true, fontSize: '18px', onClick: function onClick() {
+          return removeTab(id);
+        }, color: '#e74c3c' })
+    )
   );
 };
 var mapStateToProps = function mapStateToProps(state) {

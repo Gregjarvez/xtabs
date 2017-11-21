@@ -24,6 +24,7 @@ App
   -settings
     - settings button
     - tab count component
+    
 
 
 tabItem
@@ -31,3 +32,4 @@ tabItem
     - Link Title - [webTitle]
     - Link = [webLink]
     - Remove Button - [removeBtn]
+    - Icon .icon

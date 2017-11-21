@@ -56,7 +56,7 @@ html, div, ul, body, h3 {
 .searchField {
     flex-basis: 20%;
     width: 100%;
-    padding: 10px;
+    padding: 15px 10px;
     margin: 0 auto;
     border-bottom: 1px solid #19B5FE;
     margin: 0;
@@ -97,10 +97,34 @@ li{
     text-align: left;
     padding-bottom: 20px;
     border-bottom: 1px solid #fff;    
+    overflow: hidden;
 }
+
+li:first-child{
+    margin-top: 10px;
+}
+
+
+li:last-child{
+    border: none;
+}
+
 
 h3{
     padding-top:10px;
     color: #fff;
     font-weight: 400;
+    display: block;
+}
+
+a{
+    color: #fff;
+    text-decoration-line: none;
+    float: left;
+    margin-top: 5px;
+}
+
+.icon{
+    cursor: pointer;
+    float: right;
 }

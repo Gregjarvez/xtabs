@@ -8,12 +8,12 @@ const Tab = ({
 }) => {
   return (
     <li>
-      <h3 className="webTitle">{ title }</h3>
+      <h3 className="webTitle">{ title.slice(0,28) }</h3>
       {/* <p> { favIconUrl } </p> */}
       <div>
-        <a href={url} target="_blank" className="webLink">{url.slice(0, 15).concat('...')}</a>
+        <a href={url} target="_blank" className="webLink">{url.slice(0, 25).concat('...')} <Ionicon icon="ios-open" rotate={true} fontSize="16px" color="#10D2E5"/> </a>
       </div>
-      <Ionicon icon="ios-add-circle" fontSize="35px" onClick={() => removeTab(id)}/>
+        <div className="icon"><Ionicon icon="ios-close-circle" rotate={true} fontSize="18px" onClick={() => removeTab(id)} color="#e74c3c"/></div>
     </li>
   );
 };
