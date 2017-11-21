@@ -32,7 +32,7 @@ html, div, ul, body, h3, .app, button {
 
 .container::-webkit-scrollbar
 {
-	width: 10px;
+	width: 6px;
 	background-color: #F5F5F5;
 }
 
