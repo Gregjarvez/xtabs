@@ -87,3 +87,20 @@ html, div, ul, body, h3 {
     justify-content: center;
     align-items: center;
 }
+
+/* Tab Item */
+
+li{
+    display: block;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #fff;    
+}
+
+h3{
+    padding-top:10px;
+    color: #fff;
+    font-weight: 400;
+}

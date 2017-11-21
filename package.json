@@ -3,6 +3,7 @@
     "react": "^16.1.1",
     "react-chrome-redux": "^1.4.0",
     "react-dom": "^16.1.1",
+    "react-ionicons": "^2.0.3",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },
@@ -14,6 +15,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^1.9.0",

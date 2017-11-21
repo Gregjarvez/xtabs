@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteTab } from '../../../events/actions/index';
+import Ionicon from 'react-ionicons'
 
 const Tab = ({
   title, url, id, removeTab
@@ -12,7 +13,7 @@ const Tab = ({
       <div>
         <a href={url} target="_blank" className="webLink">{url.slice(0, 15).concat('...')}</a>
       </div>
-      <button className="removeBtn" onClick={() => removeTab(id)}>X</button>
+      <Ionicon icon="ios-add-circle" fontSize="35px" onClick={() => removeTab(id)}/>
     </li>
   );
 };
