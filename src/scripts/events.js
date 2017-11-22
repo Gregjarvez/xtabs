@@ -1,6 +1,6 @@
 /* globals chrome */
-import {saveTabs} from '../events/actions/index';
-import {extract} from './utils';
+import { saveTabs } from '../events/actions/index';
+import { extract } from './utils';
 
 class IOEvent {
   constructor(store) {
@@ -13,12 +13,11 @@ class IOEvent {
   }
 
   onTabCreate() {
-    return chrome.tabs.onCreated.addListener(
-        () => this.queryTab(this.closeOneOnExcess));
+    return chrome.tabs.onCreated.addListener(() => this.queryTab(this.closeOneOnExcess));
   }
 
   queryTab(callBack) {
-    return chrome.tabs.query({currentWindow: true}, callBack);
+    return chrome.tabs.query({ currentWindow: true }, callBack);
   }
 
   config(title) {
@@ -27,7 +26,7 @@ class IOEvent {
       iconUrl: './icons/icon48.png',
       title: 'Tab Limit has been reach',
       message: `${title} is due to be closed`,
-      buttons: [{title: 'Yes'}, {title: 'No'}],
+      buttons: [{ title: 'Yes' }, { title: 'No' }],
     };
   }
 
@@ -36,10 +35,11 @@ class IOEvent {
       const tab = tabs[0];
       const options = this.config(tab.title);
       this.createNotification(
-          tab.id,
-          options,
-          this.notificationClickHandler,
-          tab);
+        tab.id,
+        options,
+        this.notificationClickHandler,
+        tab
+      );
     }
   };
 
@@ -48,16 +48,16 @@ class IOEvent {
       const toStore = tabs.slice(0, (tabs.length - this.limit));
 
       const tabinfo = toStore.map(({
-                                     url, id, favIconUrl, title,
-                                   }) => {
+        url, id, favIconUrl, title,
+      }) => {
         return {
           url, id, favIconUrl, title,
         };
       });
 
       const ids = tabinfo.length > 1
-          ? tabinfo.map(tab => tab.id)
-          : tabinfo[0].id;
+        ? tabinfo.map(tab => tab.id)
+        : tabinfo[0].id;
       this.store.dispatch(saveTabs(tabinfo));
       chrome.tabs.remove(ids);
     }
@@ -77,9 +77,9 @@ class IOEvent {
     chrome.notifications.create(id, options);
     chrome.notifications.onButtonClicked.addListener((...args) => {
       callbackAction.apply(this, args.concat(tab))
-      .then((notifId) => {
-        chrome.notifications.clear(notifId);
-      });
+        .then((notifId) => {
+          chrome.notifications.clear(notifId);
+        });
     });
   };
 
