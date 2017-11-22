@@ -24,7 +24,7 @@ App
   -settings
     - settings button
     - tab count component
-    
+
 
 
 tabItem
@@ -36,3 +36,18 @@ tabItem
     - Setting Btn [settingBtn]
     - Limit Btn [limitBtn]
     - Limit Counter [limitCounter]
+
+
+     type: 'basic',
+            iconUrl: './icons/icon48.png',
+            title: 'Tab Limit has been reach',
+            message: 'New Tab is due to be closed',
+            buttons: [{ title: 'Yes' }, { title: 'No' }]
+
+   chrome.notifications.create(`${tabInfo.id}`, {
+        type: 'basic',
+        iconUrl: './icons/icon48.png',
+        title: 'Tab Limit has been reach',
+        message: 'New Tab is due to be closed',
+        buttons: [{ title: 'Yes' }, { title: 'No' }]
+      });
