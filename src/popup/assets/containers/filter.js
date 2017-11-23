@@ -10,9 +10,10 @@ class SearchField extends Component {
     return (
       <div className="searchField">
         <input
-          type="type"
+          type="text"
           value={this.state.searchWord}
           onChange={e => this.setState({ searchWord: e.target.value })}
+          placeholder="Filter"
         />
       </div>
     );

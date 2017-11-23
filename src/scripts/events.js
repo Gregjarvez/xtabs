@@ -32,6 +32,7 @@ class IOEvent {
 
   closeOneOnExcess = (tabs) => {
     if (tabs.length > this.limit) {
+      console.log('running');
       const tab = tabs[0];
       const options = this.config(tab.title);
       this.createNotification(

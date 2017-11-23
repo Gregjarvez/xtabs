@@ -1230,10 +1230,10 @@ var setWord = function setWord(word) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(14);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
+/* unused harmony reexport applyMiddleware */
 /* unused harmony reexport compose */
 
 
@@ -1750,7 +1750,7 @@ function bindActionCreators(actionCreators, dispatch) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
+/* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(15);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -3477,17 +3477,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_chrome_redux__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_chrome_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_chrome_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reducers__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__middleware__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scripts__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scripts__ = __webpack_require__(99);
 
 
 
 
 
+var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* createStore */])(__WEBPACK_IMPORTED_MODULE_2__reducers__["a" /* default */]);
 
-var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */])(__WEBPACK_IMPORTED_MODULE_2__reducers__["a" /* default */], Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(__WEBPACK_IMPORTED_MODULE_3__middleware__["a" /* default */]));
-
-new __WEBPACK_IMPORTED_MODULE_4__scripts__["a" /* default */](store);
+var app = new __WEBPACK_IMPORTED_MODULE_3__scripts__["a" /* default */](store);
 
 Object(__WEBPACK_IMPORTED_MODULE_1_react_chrome_redux__["wrapStore"])(store, {
   portName: 'stackTabs'
@@ -3509,7 +3507,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1_react_chrome_redux__["wrapStore"])(store, {
 
 
 
-var rootReducers = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */])({
+var rootReducers = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["b" /* combineReducers */])({
   tabs: __WEBPACK_IMPORTED_MODULE_1__tabs__["a" /* default */],
   tabLimit: __WEBPACK_IMPORTED_MODULE_3__limitReducer__["a" /* default */],
   searchWord: __WEBPACK_IMPORTED_MODULE_2__searchWord__["a" /* default */]
@@ -3619,23 +3617,7 @@ var tabLimit = function tabLimit() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var logger = function logger(store) {
-  return function (next) {
-    return function (action) {
-      console.log(store.getState());
-      next(action);
-    };
-  };
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (logger);
-
-/***/ }),
-/* 100 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(100);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 
@@ -3649,12 +3631,12 @@ var App = function App(store) {
 /* harmony default export */ __webpack_exports__["a"] = (App);
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events_actions_index__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(101);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* globals chrome */
@@ -3669,6 +3651,7 @@ var IOEvent = function () {
 
     this.closeOneOnExcess = function (tabs) {
       if (tabs.length > _this.limit) {
+        console.log('running');
         var tab = tabs[0];
         var options = _this.config(tab.title);
         _this.createNotification(tab.id, options, _this.notificationClickHandler, tab);
@@ -3768,7 +3751,7 @@ var IOEvent = function () {
 /* harmony default export */ __webpack_exports__["a"] = (IOEvent);
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

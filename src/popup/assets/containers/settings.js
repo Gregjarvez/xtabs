@@ -29,12 +29,12 @@ class Setting extends Component {
 
   render() {
     return (
-      <div>
+      <div className="settings">
         {
           !this.state.visible &&
           <Button
             classnameBtn="settingBtn"
-            title="Setting"
+            title="&#9881;"
             onclick={this.limitVisibility}
           />
         }

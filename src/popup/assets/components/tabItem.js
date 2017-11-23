@@ -1,19 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTab } from '../../../events/actions/index';
 import Ionicon from 'react-ionicons'
+import { deleteTab } from '../../../events/actions/index';
 
 const Tab = ({
   title, url, id, removeTab
 }) => {
   return (
     <li>
-      <h3 className="webTitle">{ title.slice(0,28) }</h3>
-      {/* <p> { favIconUrl } </p> */}
-      <div>
-        <a href={url} target="_blank" className="webLink">{url.slice(0, 25).concat('...')} <Ionicon icon="ios-open" rotate={true} fontSize="16px" color="#10D2E5"/> </a>
+      <h3 className="tab-title">{ (title).substring(0, 25) }</h3>
+      <div className="tab-ctrl">
+        <a
+            href={url}
+            target="_blank"
+            className="tab-link">
+          {url.slice(0, 25).concat('...')}
+        </a>
+        <div>
+        <Ionicon
+            icon="ios-close-circle"
+            rotate={true}
+            fontSize="18px"
+            className="close"
+            onClick={() => removeTab(id)} color="#e74c3c"/>
       </div>
-        <div className="icon"><Ionicon icon="ios-close-circle" rotate={true} fontSize="18px" onClick={() => removeTab(id)} color="#e74c3c"/></div>
+      </div>
     </li>
   );
 };

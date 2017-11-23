@@ -1,15 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux';
 import { wrapStore } from 'react-chrome-redux';
 import rootReducer from './reducers';
-import logger from './middleware';
 import App from '../scripts';
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(logger)
-);
+const store = createStore(rootReducer);
 
-new App(store);
+const app = new App(store);
 
 wrapStore(store, {
   portName: 'stackTabs'

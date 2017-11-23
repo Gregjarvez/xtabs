@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from './header';
+import SearchField from './filter';
 import Stack from './stack';
 import Settings from './settings';
 
 const App = () => (
     <div className="container">
-      <Header/>
-      <Stack/>
-      <Settings/>
+      <SearchField />
+      <Stack />
+      <Settings />
     </div>
 );
 
