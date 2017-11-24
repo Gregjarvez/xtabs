@@ -7452,13 +7452,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var Stack = function (_Component) {
-  _inherits(Stack, _Component);
+var Stack = function (_PureComponent) {
+  _inherits(Stack, _PureComponent);
 
   function Stack(props) {
     _classCallCheck(this, Stack);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+    var _this = _possibleConstructorReturn(this, _PureComponent.call(this, props));
 
     _this.includesSearchWord = function (tab) {
       var word = _this.props.searchWord.toLowerCase();
@@ -7499,7 +7499,7 @@ var Stack = function (_Component) {
   };
 
   return Stack;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_0_react__["PureComponent"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -7537,7 +7537,7 @@ var Tab = function Tab(_ref) {
     __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
       'h3',
       { className: 'tab-title' },
-      title.substring(0, 25)
+      title.substring(0, 35)
     ),
     __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
       'div',
@@ -7547,8 +7547,9 @@ var Tab = function Tab(_ref) {
         {
           href: url,
           target: '_blank',
-          className: 'tab-link' },
-        url.slice(0, 25).concat('...')
+          className: 'tab-link'
+        },
+        url.slice(0, 30).concat('...')
       ),
       __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
         'div',
@@ -7560,7 +7561,9 @@ var Tab = function Tab(_ref) {
           className: 'close',
           onClick: function onClick() {
             return removeTab(id);
-          }, color: '#e74c3c' })
+          },
+          color: '#e74c3c'
+        })
       )
     )
   );
@@ -8520,6 +8523,7 @@ Object.defineProperty(exports,"__esModule",{value:true});exports.default=[{"path
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_button__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__events_actions_index__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_gear__ = __webpack_require__(133);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -8531,13 +8535,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var Setting = function (_Component) {
-  _inherits(Setting, _Component);
+
+var Setting = function (_PureComponent) {
+  _inherits(Setting, _PureComponent);
 
   function Setting(props) {
     _classCallCheck(this, Setting);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+    var _this = _possibleConstructorReturn(this, _PureComponent.call(this, props));
 
     _this.limitVisibility = function () {
       _this.setState({ visible: true });
@@ -8571,7 +8576,7 @@ var Setting = function (_Component) {
       { className: 'settings' },
       !this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], {
         classnameBtn: 'settingBtn',
-        title: '\u2699',
+        title: __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_4__components_gear__["a" /* default */], null),
         onclick: this.limitVisibility
       }),
       this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
@@ -8589,7 +8594,7 @@ var Setting = function (_Component) {
   };
 
   return Setting;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_0_react__["PureComponent"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -8626,6 +8631,29 @@ var Button = function Button(_ref) {
   );
 };
 /* harmony default export */ __webpack_exports__["a"] = (Button);
+
+/***/ }),
+/* 133 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_png__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__settings_png__);
+
+
+
+var Gear = function Gear() {
+  return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement('img', { src: __WEBPACK_IMPORTED_MODULE_1__settings_png___default.a, alt: 'Gear' });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Gear);
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "cbad4f453e944612862c66a78d9d91bd.png";
 
 /***/ })
 /******/ ]);

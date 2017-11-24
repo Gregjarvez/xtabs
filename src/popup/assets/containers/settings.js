@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Button from '../components/button';
 import { setLimit } from '../../../events/actions/index';
+import Gear from '../components/gear';
 
-class Setting extends Component {
+class Setting extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { visible: false };
@@ -34,7 +35,7 @@ class Setting extends Component {
           !this.state.visible &&
           <Button
             classnameBtn="settingBtn"
-            title="&#9881;"
+            title={<Gear />}
             onclick={this.limitVisibility}
           />
         }

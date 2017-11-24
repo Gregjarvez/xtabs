@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import TabItem from '../components/tabItem';
 
-class Stack extends Component {
+class Stack extends PureComponent {
   constructor(props) {
     super(props);
   }
