@@ -7456,7 +7456,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/* eslint-disable */
 
 
 
@@ -7477,23 +7476,33 @@ var Stack = function (_PureComponent) {
       return tab.title.concat(tab.url).toLowerCase().includes(word);
     };
 
-    _this.populate = function (_ref) {
-      var url = _ref.url,
-          title = _ref.title,
-          id = _ref.id,
-          favIconUrl = _ref.favIconUrl;
-
-      return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_2__components_tabItem__["a" /* default */], {
-        key: id,
-        id: id,
-        url: url,
-        title: title,
-        favIconUrl: favIconUrl
-      });
+    _this.populate = function (predicate) {
+      return function (acc, nextTab) {
+        if (predicate(nextTab)) {
+          acc.push(_this.tabItem(nextTab));
+          return acc;
+        }
+        return acc;
+      };
     };
 
     return _this;
   }
+
+  Stack.prototype.tabItem = function tabItem(_ref) {
+    var url = _ref.url,
+        title = _ref.title,
+        id = _ref.id,
+        favIconUrl = _ref.favIconUrl;
+
+    return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_2__components_tabItem__["a" /* default */], {
+      key: id,
+      id: id,
+      url: url,
+      title: title,
+      favIconUrl: favIconUrl
+    });
+  };
 
   Stack.prototype.render = function render() {
     return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
@@ -7502,7 +7511,7 @@ var Stack = function (_PureComponent) {
       __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
         'ul',
         null,
-        this.props.tabs && this.props.tabs.filter(this.includesSearchWord).map(this.populate)
+        this.props.tabs && this.props.tabs.reduce(this.populate(this.includesSearchWord), [])
       )
     );
   };

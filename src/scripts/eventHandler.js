@@ -40,6 +40,18 @@ class EventHandler {
     tabs = tabs.sort((a, b) => a.id - b.id);
     return this.closeTab(tabs);
   }
+
+  setBadgeNumber(num) {
+    return chrome
+      .browserAction
+      .setBadgeText({ text: `${num}` });
+  }
+
+  setInitialBackground() {
+    chrome
+      .browserAction
+      .setBadgeBackgroundColor({ color: '#118AB2' });
+  }
 }
 
 export default EventHandler;

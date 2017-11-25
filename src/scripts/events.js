@@ -28,25 +28,23 @@ class IOEvent {
   handleChange = () => {
     const { tabLimit, closeType, tabs } = this.store.getState();
     this.closeType = closeType;
+    chrome
+      .browserAction
+      .setBadgeText({ text: `${tabs.length}` });
 
-    if (this.limit !== tabLimit) {
-      this.limit = tabLimit;
-      chrome.browserAction.setBadgeText({ text: `${tabs.length}` });
+    if (this.limit === tabLimit) {
       return;
     }
+    this.limit = tabLimit;
 
     this.queryTab(this.handler.closeMultipleOnExcess);
   };
 
   setInitialBadgeStatus() {
-    chrome
-      .browserAction
-      .setBadgeBackgroundColor({ color: '#118AB2' });
-
-    chrome
-        .browserAction
-        .setBadgeText({ text: `${this.store.getState().tabs.length}` });
+    this.handler.setInitialBackground();
+    this.hanlder.setBadgeNumber(this.store.getState().tabs.length);
   }
+
 }
 
 export default IOEvent;

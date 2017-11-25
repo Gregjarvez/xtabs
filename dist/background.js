@@ -3674,12 +3674,12 @@ var IOEvent = function () {
           tabs = _store$getState.tabs;
 
       _this.closeType = closeType;
+      chrome.browserAction.setBadgeText({ text: '' + tabs.length });
 
-      if (_this.limit !== tabLimit) {
-        _this.limit = tabLimit;
-        chrome.browserAction.setBadgeText({ text: '' + tabs.length });
+      if (_this.limit === tabLimit) {
         return;
       }
+      _this.limit = tabLimit;
 
       _this.queryTab(_this.handler.closeMultipleOnExcess);
     };
@@ -3708,9 +3708,8 @@ var IOEvent = function () {
   };
 
   IOEvent.prototype.setInitialBadgeStatus = function setInitialBadgeStatus() {
-    chrome.browserAction.setBadgeBackgroundColor({ color: '#118AB2' });
-
-    chrome.browserAction.setBadgeText({ text: '' + this.store.getState().tabs.length });
+    this.handler.setInitialBackground();
+    this.hanlder.setBadgeNumber(this.store.getState().tabs.length);
   };
 
   return IOEvent;
@@ -3857,6 +3856,14 @@ var EventHandler = function () {
       return a.id - b.id;
     });
     return this.closeTab(tabs);
+  };
+
+  EventHandler.prototype.setBadgeNumber = function setBadgeNumber(num) {
+    return chrome.browserAction.setBadgeText({ text: '' + num });
+  };
+
+  EventHandler.prototype.setInitialBackground = function setInitialBackground() {
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#118AB2' });
   };
 
   return EventHandler;

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import TabItem from '../components/tabItem';
@@ -8,16 +7,9 @@ class Stack extends PureComponent {
     super(props);
   }
 
-  includesSearchWord = (tab) => {
-    const word = this.props.searchWord.toLowerCase();
-    if (!this.props.searchWord.length) {
-      return tab;
-    }
-    return tab.title.concat(tab.url).toLowerCase()
-      .includes(word);
-  }
-
-  populate = ({ url, title, id, favIconUrl }) => {
+  tabItem({
+    url, title, id, favIconUrl
+  }) {
     return (
       <TabItem
         key={id}
@@ -29,6 +21,23 @@ class Stack extends PureComponent {
     );
   }
 
+  includesSearchWord = (tab) => {
+    const word = this.props.searchWord.toLowerCase();
+    if (!this.props.searchWord.length) {
+      return tab;
+    }
+    return tab.title.concat(tab.url).toLowerCase()
+      .includes(word);
+  };
+
+  populate = predicate => (acc, nextTab) => {
+    if (predicate(nextTab)) {
+      acc.push(this.tabItem(nextTab));
+      return acc;
+    }
+    return acc;
+  }
+
   render() {
     return (
       <div className="stack">
@@ -36,8 +45,7 @@ class Stack extends PureComponent {
           {
               this.props.tabs &&
               this.props.tabs
-                  .filter(this.includesSearchWord)
-                  .map(this.populate)
+                  .reduce(this.populate(this.includesSearchWord), [])
             }
         </ul>
       </div>
