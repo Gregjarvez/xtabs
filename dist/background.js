@@ -540,7 +540,8 @@ var constants = {
   DELETE_TAB: 'DELETE_TAB',
   FILTER: 'FILTER',
   SETWORD: 'SETWORD',
-  SETLIMIT: 'SETLIMIT'
+  SETLIMIT: 'SETLIMIT',
+  CLOSETYPE: 'CLOSETYPE'
 };
 /* harmony default export */ __webpack_exports__["a"] = (constants);
 
@@ -1182,10 +1183,11 @@ module.exports = isIndex;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deleteTab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return saveTabs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return setLimit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return setWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return deleteTab; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return saveTabs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return setLimit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return setWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return closeType; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(10);
 
 
@@ -1217,6 +1219,13 @@ var setWord = function setWord(word) {
   };
 };
 
+var closeType = function closeType(id) {
+  return {
+    type: __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* default */].CLOSETYPE,
+    payload: id
+  };
+};
+
 /***/ }),
 /* 27 */,
 /* 28 */,
@@ -1230,10 +1239,10 @@ var setWord = function setWord(word) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(14);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
-/* unused harmony reexport applyMiddleware */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
 /* unused harmony reexport compose */
 
 
@@ -1750,7 +1759,7 @@ function bindActionCreators(actionCreators, dispatch) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export default */
+/* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(15);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -3483,7 +3492,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* createStore */])(__WEBPACK_IMPORTED_MODULE_2__reducers__["a" /* default */]);
+var logger = function logger(store) {
+  return function (next) {
+    return function (action) {
+      console.log(store.getState());
+      next(action);
+    };
+  };
+};
+
+var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */])(__WEBPACK_IMPORTED_MODULE_2__reducers__["a" /* default */], Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(logger));
 
 var app = new __WEBPACK_IMPORTED_MODULE_3__scripts__["a" /* default */](store);
 
@@ -3502,15 +3520,18 @@ Object(__WEBPACK_IMPORTED_MODULE_1_react_chrome_redux__["wrapStore"])(store, {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tabs__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__searchWord__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__limitReducer__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__closetype__ = __webpack_require__(137);
 
 
 
 
 
-var rootReducers = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["b" /* combineReducers */])({
+
+var rootReducers = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */])({
   tabs: __WEBPACK_IMPORTED_MODULE_1__tabs__["a" /* default */],
   tabLimit: __WEBPACK_IMPORTED_MODULE_3__limitReducer__["a" /* default */],
-  searchWord: __WEBPACK_IMPORTED_MODULE_2__searchWord__["a" /* default */]
+  searchWord: __WEBPACK_IMPORTED_MODULE_2__searchWord__["a" /* default */],
+  closeType: __WEBPACK_IMPORTED_MODULE_4__closetype__["a" /* default */]
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (rootReducers);
@@ -3635,11 +3656,8 @@ var App = function App(store) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events_actions_index__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__eventHandler__ = __webpack_require__(138);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/* globals chrome */
 
 
 
@@ -3649,74 +3667,39 @@ var IOEvent = function () {
 
     _classCallCheck(this, IOEvent);
 
-    this.closeOneOnExcess = function (tabs) {
-      if (tabs.length > _this.limit) {
-        console.log('running');
-        var tab = tabs[0];
-        var options = _this.config(tab.title);
-        _this.createNotification(tab.id, options, _this.notificationClickHandler, tab);
-      }
-    };
-
-    this.closeMultipleOnExcess = function (tabs) {
-      if (tabs.length > _this.limit) {
-        var toStore = tabs.slice(0, tabs.length - _this.limit);
-
-        var tabinfo = toStore.map(function (_ref) {
-          var url = _ref.url,
-              id = _ref.id,
-              favIconUrl = _ref.favIconUrl,
-              title = _ref.title;
-
-          return {
-            url: url, id: id, favIconUrl: favIconUrl, title: title
-          };
-        });
-
-        var ids = tabinfo.length > 1 ? tabinfo.map(function (tab) {
-          return tab.id;
-        }) : tabinfo[0].id;
-        _this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_0__events_actions_index__["b" /* saveTabs */])(tabinfo));
-        chrome.tabs.remove(ids);
-      }
-    };
-
     this.handleChange = function () {
-      var val = _this.store.getState().tabLimit;
-      if (_this.limit === val) return;
-      _this.limit = val;
+      var _store$getState = _this.store.getState(),
+          tabLimit = _store$getState.tabLimit,
+          closeType = _store$getState.closeType,
+          tabs = _store$getState.tabs;
 
-      _this.queryTab(_this.closeMultipleOnExcess);
-    };
+      _this.closeType = closeType;
 
-    this.createNotification = function (id, options, callbackAction, tab) {
-      id = id.toString();
+      if (_this.limit !== tabLimit) {
+        _this.limit = tabLimit;
+        chrome.browserAction.setBadgeText({ text: '' + tabs.length });
+        return;
+      }
 
-      chrome.notifications.create(id, options);
-      chrome.notifications.onButtonClicked.addListener(function () {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        callbackAction.apply(_this, args.concat(tab)).then(function (notifId) {
-          chrome.notifications.clear(notifId);
-        });
-      });
+      _this.queryTab(_this.handler.closeMultipleOnExcess);
     };
 
     this.limit = 6;
     this.store = store;
+    this.closeType = this.store.getState().closeType;
+    this.handler = new __WEBPACK_IMPORTED_MODULE_0__eventHandler__["a" /* default */](this);
+    this.unsubscribe = this.store.subscribe(this.handleChange);
 
-    this.queryTab(this.closeMultipleOnExcess);
     this.onTabCreate();
-    this.store.subscribe(this.handleChange);
+    this.queryTab(this.handler.closeMultipleOnExcess);
+    this.setInitialBadgeStatus();
   }
 
   IOEvent.prototype.onTabCreate = function onTabCreate() {
     var _this2 = this;
 
     return chrome.tabs.onCreated.addListener(function () {
-      return _this2.queryTab(_this2.closeOneOnExcess);
+      return _this2.queryTab(_this2.handler.closeOneOnExcess);
     });
   };
 
@@ -3724,25 +3707,10 @@ var IOEvent = function () {
     return chrome.tabs.query({ currentWindow: true }, callBack);
   };
 
-  IOEvent.prototype.config = function config(title) {
-    return {
-      type: 'basic',
-      iconUrl: './icons/icon48.png',
-      title: 'Tab Limit has been reach',
-      message: title + ' is due to be closed',
-      buttons: [{ title: 'Yes' }, { title: 'No' }]
-    };
-  };
+  IOEvent.prototype.setInitialBadgeStatus = function setInitialBadgeStatus() {
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#118AB2' });
 
-  IOEvent.prototype.notificationClickHandler = function notificationClickHandler(id, index, tab) {
-    if (index === 0) {
-      var tabInfo = Object(__WEBPACK_IMPORTED_MODULE_1__utils__["a" /* extract */])(['id', 'url', 'title', 'favIconUrl'], tab);
-
-      this.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_0__events_actions_index__["b" /* saveTabs */])(tabInfo));
-      chrome.tabs.remove(tabInfo.id);
-    }
-
-    return Promise.resolve(id);
+    chrome.browserAction.setBadgeText({ text: '' + this.store.getState().tabs.length });
   };
 
   return IOEvent;
@@ -3756,6 +3724,7 @@ var IOEvent = function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return extract; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getTabInfo; });
 var extract = function extract(params, object) {
   if (params.length === 1) return object[params];
   return params.reduce(function (cur, next) {
@@ -3763,6 +3732,137 @@ var extract = function extract(params, object) {
     return cur;
   }, {});
 };
+
+var getTabInfo = function getTabInfo(_ref) {
+  var url = _ref.url,
+      id = _ref.id,
+      favIconUrl = _ref.favIconUrl,
+      title = _ref.title;
+  return {
+    url: url,
+    id: id,
+    favIconUrl: favIconUrl,
+    title: title
+  };
+};
+
+/***/ }),
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(10);
+
+
+var closeType = function closeType() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'left-most';
+  var action = arguments[1];
+
+  switch (action.type) {
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* default */].CLOSETYPE:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (closeType);
+
+/***/ }),
+/* 138 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__events_actions_index__ = __webpack_require__(26);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+var EventHandler = function () {
+  function EventHandler(context) {
+    var _this = this;
+
+    _classCallCheck(this, EventHandler);
+
+    this.closeOneOnExcess = function (tabs) {
+      if (tabs.length > _this.context.limit) {
+        if (_this.context.closeType === 'left-most') {
+          return _this.closeTab(tabs);
+        }
+        return _this.closeOldestTab(tabs);
+      }
+    };
+
+    this.closeMultipleOnExcess = function (tabs) {
+      if (tabs.length > _this.context.limit) {
+        var tabinfo = tabs.slice(0, tabs.length - _this.context.limit).map(__WEBPACK_IMPORTED_MODULE_0__utils__["b" /* getTabInfo */]);
+
+        _this.context.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__events_actions_index__["c" /* saveTabs */])(tabinfo));
+        chrome.tabs.remove(tabinfo.map(function (tab) {
+          return tab.id;
+        }));
+      }
+    };
+
+    this.context = context;
+  }
+
+  EventHandler.prototype.closeTab = function closeTab(_ref) {
+    var tab = _ref[0];
+
+    var tabInfo = Object(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* extract */])(['id', 'url', 'title', 'favIconUrl'], tab);
+    this.context.store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__events_actions_index__["c" /* saveTabs */])(tabInfo));
+    chrome.tabs.remove(tabInfo.id);
+  };
+
+  EventHandler.prototype.closeOldestTab = function closeOldestTab(tabs) {
+    tabs = tabs.sort(function (a, b) {
+      return a.id - b.id;
+    });
+    return this.closeTab(tabs);
+  };
+
+  return EventHandler;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (EventHandler);
 
 /***/ })
 /******/ ]);

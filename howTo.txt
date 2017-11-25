@@ -51,3 +51,25 @@ tabItem
         message: 'New Tab is due to be closed',
         buttons: [{ title: 'Yes' }, { title: 'No' }]
       });
+
+
+ const options = this.config(tab.title);
+      this.createNotification(
+        tab.id,
+        options,
+        this.notificationClickHandler,
+        tab
+      );
+
+
+ createNotification = (id, options, callbackAction, tab) => {
+    id = (id).toString();
+
+    chrome.notifications.create(id, options);
+    chrome.notifications.onButtonClicked.addListener((...args) => {
+      callbackAction.apply(this, args.concat(tab))
+        .then((notifId) => {
+          chrome.notifications.clear(notifId);
+        });
+    });
+  };

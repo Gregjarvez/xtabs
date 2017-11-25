@@ -6,3 +6,13 @@ export const extract = (params, object) => {
       return cur;
     }, {});
 };
+
+export const getTabInfo = ({
+  url, id, favIconUrl, title
+}) => ({
+  url,
+  id,
+  favIconUrl,
+  title
+});
+

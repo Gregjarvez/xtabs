@@ -13,6 +13,9 @@
         "jest": true,
         "es6": true
     },
+    "globals": {
+        "chrome": true
+    },
     "extends": ["airbnb", "plugin:react/recommended"],
     "rules": {
         "react/forbid-prop-types": 0,

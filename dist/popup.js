@@ -1197,7 +1197,8 @@ var constants = {
   DELETE_TAB: 'DELETE_TAB',
   FILTER: 'FILTER',
   SETWORD: 'SETWORD',
-  SETLIMIT: 'SETLIMIT'
+  SETLIMIT: 'SETLIMIT',
+  CLOSETYPE: 'CLOSETYPE'
 };
 /* harmony default export */ __webpack_exports__["a"] = (constants);
 
@@ -1898,10 +1899,11 @@ module.exports = isIndex;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deleteTab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return saveTabs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return setLimit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return setWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return deleteTab; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return saveTabs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return setLimit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return setWord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return closeType; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(10);
 
 
@@ -1930,6 +1932,13 @@ var setWord = function setWord(word) {
   return {
     type: __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* default */].SETWORD,
     payload: word
+  };
+};
+
+var closeType = function closeType(id) {
+  return {
+    type: __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* default */].CLOSETYPE,
+    payload: id
   };
 };
 
@@ -2004,10 +2013,10 @@ module.exports = emptyFunction;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(14);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
-/* unused harmony reexport applyMiddleware */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
 /* unused harmony reexport compose */
 
 
@@ -2592,7 +2601,7 @@ function bindActionCreators(actionCreators, dispatch) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export default */
+/* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(15);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -7116,7 +7125,7 @@ function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
 
 function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
   return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? Object(__WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__["a" /* wrapMapToPropsConstant */])(function (dispatch) {
-    return Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* bindActionCreators */])(mapDispatchToProps, dispatch);
+    return Object(__WEBPACK_IMPORTED_MODULE_0_redux__["b" /* bindActionCreators */])(mapDispatchToProps, dispatch);
   }) : undefined;
 }
 
@@ -7426,7 +7435,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     setSearchWord: function setSearchWord(word) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__events_actions__["d" /* setWord */])(word));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__events_actions__["e" /* setWord */])(word));
     }
   };
 };
@@ -7529,15 +7538,25 @@ var Tab = function Tab(_ref) {
   var title = _ref.title,
       url = _ref.url,
       id = _ref.id,
-      removeTab = _ref.removeTab;
+      removeTab = _ref.removeTab,
+      favIconUrl = _ref.favIconUrl;
 
   return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
     'li',
     null,
     __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
-      'h3',
-      { className: 'tab-title' },
-      title.substring(0, 35)
+      'div',
+      { className: 'tab-header' },
+      __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement('img', {
+        src: ('' + favIconUrl).includes('https') ? favIconUrl : './icons/favicon.ico',
+        alt: 'fav icon',
+        className: 'favIcon'
+      }),
+      __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+        'h3',
+        { className: 'tab-title' },
+        title.substring(0, 35)
+      )
     ),
     __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
       'div',
@@ -7574,7 +7593,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeTab: function removeTab(id) {
-      dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__events_actions_index__["a" /* deleteTab */])(id));
+      dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__events_actions_index__["b" /* deleteTab */])(id));
     }
   };
 };
@@ -8521,14 +8540,18 @@ Object.defineProperty(exports,"__esModule",{value:true});exports.default=[{"path
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_button__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__events_actions_index__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__events_actions_index__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_button__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_gear__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_query__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_counter__ = __webpack_require__(136);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -8560,7 +8583,9 @@ var Setting = function (_PureComponent) {
       });
     };
 
-    _this.state = { visible: false };
+    _this.state = {
+      visible: false
+    };
     return _this;
   }
 
@@ -8574,21 +8599,24 @@ var Setting = function (_PureComponent) {
     return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
       'div',
       { className: 'settings' },
-      !this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], {
-        classnameBtn: 'settingBtn',
-        title: __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_4__components_gear__["a" /* default */], null),
-        onclick: this.limitVisibility
-      }),
+      !this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+        __WEBPACK_IMPORTED_MODULE_3__components_button__["a" /* default */],
+        { buttonClassName: 'settingBtn', onclick: this.limitVisibility },
+        __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_4__components_gear__["a" /* default */], null)
+      ),
       this.state.visible && __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
         'div',
-        { className: 'limitBtns' },
-        __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], { classnameBtn: 'limitBtn', title: '<', onclick: this.decrement }),
+        { className: 'settings-panel-visible' },
+        __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_6__components_counter__["a" /* default */], {
+          tabLimit: this.props.tabLimit,
+          decrement: this.decrement,
+          increment: this.increment
+        }),
         __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
           'span',
-          { className: 'limitCounter' },
-          this.props.tabLimit
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_2__components_button__["a" /* default */], { classnameBtn: 'limitBtn', title: '>', onclick: this.increment })
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(__WEBPACK_IMPORTED_MODULE_5__components_query__["a" /* default */], null)
+        )
       )
     );
   };
@@ -8604,7 +8632,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     setTabLimit: function setTabLimit(limit) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__events_actions_index__["c" /* setLimit */])(limit));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__events_actions_index__["d" /* setLimit */])(limit));
     }
   };
 };
@@ -8620,14 +8648,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 
 var Button = function Button(_ref) {
-  var title = _ref.title,
-      onclick = _ref.onclick,
-      classnameBtn = _ref.classnameBtn;
+  var onclick = _ref.onclick,
+      buttonClassName = _ref.buttonClassName,
+      children = _ref.children;
 
   return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
     'button',
-    { onClick: onclick, className: classnameBtn },
-    title
+    { className: buttonClassName, onClick: onclick },
+    children
   );
 };
 /* harmony default export */ __webpack_exports__["a"] = (Button);
@@ -8654,6 +8682,118 @@ var Gear = function Gear() {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "cbad4f453e944612862c66a78d9d91bd.png";
+
+/***/ }),
+/* 135 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__events_actions__ = __webpack_require__(26);
+/* eslint-disable */
+
+
+
+
+var Query = function Query(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+    'form',
+    null,
+    __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+      'div',
+      { className: 'form-heading' },
+      'CLOSE'
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement('input', {
+        type: 'radio',
+        id: 'oldest',
+        name: 'close',
+        checked: props.closeType === 'oldest',
+        onChange: function onChange() {
+          return props.setCloseType('oldest');
+        }
+      }),
+      __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+        'label',
+        { htmlFor: 'oldest', className: 'label' },
+        'Oldest'
+      )
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement('input', {
+        type: 'radio',
+        id: 'left-most',
+        name: 'close',
+        checked: props.closeType === 'left-most',
+        onChange: function onChange() {
+          return props.setCloseType('left-most');
+        }
+      }),
+      __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+        'label',
+        { htmlFor: 'left-most', className: 'label' },
+        'Left-most Tab'
+      )
+    )
+  );
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    closeType: state.closeType
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    setCloseType: function setCloseType(id) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__events_actions__["a" /* closeType */])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps, mapDispatchToProps)(Query));
+
+/***/ }),
+/* 136 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__button__ = __webpack_require__(132);
+
+
+
+var Counter = function Counter(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+    'span',
+    { className: 'limitBtns' },
+    __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+      __WEBPACK_IMPORTED_MODULE_1__button__["a" /* default */],
+      { buttonClassName: 'limitBtn', onclick: props.increment },
+      '+'
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+      'span',
+      { className: 'limitCounter' },
+      'Limit: ',
+      props.tabLimit
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react__["default"].createElement(
+      __WEBPACK_IMPORTED_MODULE_1__button__["a" /* default */],
+      { buttonClassName: 'limitBtn', onclick: props.decrement },
+      '-'
+    )
+  );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Counter);
 
 /***/ })
 /******/ ]);

@@ -1,18 +1,23 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import Button from '../components/button';
 import { setLimit } from '../../../events/actions/index';
+import Button from '../components/button';
 import Gear from '../components/gear';
+import Query from '../components/query';
+import Counter from '../components/counter';
+
 
 class Setting extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { visible: false };
+    this.state = {
+      visible: false,
+    };
   }
 
   limitVisibility = () => {
     this.setState({ visible: true });
-  }
+  };
 
   operator(cb) {
     const val = cb(this.props.tabLimit);
@@ -31,34 +36,34 @@ class Setting extends PureComponent {
   render() {
     return (
       <div className="settings">
-        {
-          !this.state.visible &&
-          <Button
-            classnameBtn="settingBtn"
-            title={<Gear />}
-            onclick={this.limitVisibility}
-          />
+        { !this.state.visible &&
+          <Button buttonClassName="settingBtn" onclick={this.limitVisibility}>
+            <Gear />
+          </Button>
         }
-        {
-          this.state.visible &&
-          <div className="limitBtns">
-            <Button classnameBtn="limitBtn" title="<" onclick={this.decrement} />
-            <span className="limitCounter">{this.props.tabLimit}</span>
-            <Button classnameBtn="limitBtn" title=">" onclick={this.increment} />
+        { this.state.visible &&
+          <div className="settings-panel-visible">
+            <Counter
+              tabLimit={this.props.tabLimit}
+              decrement={this.decrement}
+              increment={this.increment}
+            />
+            <span>
+              <Query />
+            </span>
           </div>
         }
       </div>
     );
   }
 }
+
 const mapStateToProps = state => ({
   tabLimit: state.tabLimit
 });
-const mapDispatchToProps = dispatch => (
-  {
-    setTabLimit: limit => dispatch(setLimit(limit))
-  }
-);
+const mapDispatchToProps = dispatch => ({
+  setTabLimit: limit => dispatch(setLimit(limit))
+});
 
 export default connect(
   mapStateToProps,
