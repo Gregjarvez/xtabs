@@ -1,6 +1,6 @@
 import constants from '../constants/index';
 
-const tabLimit = (state = 6, action) => {
+const tabLimit = (state = 10, action) => {
   switch (action.type) {
     case constants.SETLIMIT:
       return action.payload;

@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import TabItem from '../components/tabItem';
 
 class Stack extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   tabItem({
     url, title, id, favIconUrl

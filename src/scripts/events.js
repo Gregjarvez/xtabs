@@ -2,9 +2,10 @@ import EventHandler from './eventHandler';
 
 class IOEvent {
   constructor(store) {
-    this.limit = 6;
     this.store = store;
-    this.closeType = this.store.getState().closeType;
+    const { closeType, tabLimit } = this.store.getState();
+    this.limit = tabLimit;
+    this.closeType = closeType;
     this.handler = new EventHandler(this);
     this.unsubscribe = this.store.subscribe(this.handleChange);
 
@@ -28,23 +29,19 @@ class IOEvent {
   handleChange = () => {
     const { tabLimit, closeType, tabs } = this.store.getState();
     this.closeType = closeType;
-    chrome
-      .browserAction
-      .setBadgeText({ text: `${tabs.length}` });
+    this.handler.setBadgeNumber(tabs.length);
 
     if (this.limit === tabLimit) {
       return;
     }
     this.limit = tabLimit;
-
     this.queryTab(this.handler.closeMultipleOnExcess);
   };
 
   setInitialBadgeStatus() {
     this.handler.setInitialBackground();
-    this.hanlder.setBadgeNumber(this.store.getState().tabs.length);
+    this.handler.setBadgeNumber(this.store.getState().tabs.length);
   }
-
 }
 
 export default IOEvent;
