@@ -4,6 +4,7 @@ const constants = {
   FILTER: 'FILTER',
   SETWORD: 'SETWORD',
   SETLIMIT: 'SETLIMIT',
-  CLOSETYPE: 'CLOSETYPE'
+  CLOSETYPE: 'CLOSETYPE',
+  REMOVE_ON_OPEN: 'REMOVE_ON_OPEN'
 };
 export default constants;

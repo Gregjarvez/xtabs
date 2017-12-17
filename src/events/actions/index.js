@@ -24,3 +24,8 @@ export const closeType = id => ({
   type: constants.CLOSETYPE,
   payload: id
 });
+
+export const removeOnOpen = id => ({
+  type: constants.REMOVE_ON_OPEN,
+  payload: id
+});
