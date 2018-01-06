@@ -1,6 +1,7 @@
 import React from 'react';
 
 const TabBody = ({ url, removeTab, id }) => {
+
   return (
     <div className="tab-ctrl">
       <a href={url} target="_blank" className="tab-link" onClick={() => removeTab(id)}>
