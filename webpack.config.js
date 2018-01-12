@@ -7,6 +7,15 @@ const entry = {
   popup: './src/popup/popup.js',
 };
 
+const buildPlugin = () => {
+  return process.env.NODE_ENV === 'production' ?
+    [new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new BundleAnalyzerPlugin()] : [];
+};
+
 const config = {
   context: __dirname,
   entry,
@@ -39,23 +48,13 @@ const config = {
         loader: 'html-loader',
       },
       {
-        test: /\.css$/,
-        loader: 'css-loader',
-      },
-      {
         test: /\.(jpe?g|png|gif|svg)(?:\?.*|)$/i,
         use: 'file-loader'
       }
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin(),
-    new BundleAnalyzerPlugin()
+    ...buildPlugin()
   ],
 };
 

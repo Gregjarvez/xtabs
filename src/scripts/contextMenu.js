@@ -1,5 +1,4 @@
 const ContextMenu = {
-
   initialLizeContextMenu() {
     chrome.contextMenus.create({
       id: 'stack_tab_context_menu',
