@@ -12,7 +12,7 @@ export const saveTabs = tab => ({
 
 export const setLimit = limit => ({
   type: constants.SETLIMIT,
-  payload: limit
+  payload: { tabLimit: limit }
 });
 
 export const setWord = word => ({
@@ -20,9 +20,9 @@ export const setWord = word => ({
   payload: word
 });
 
-export const closeType = id => ({
+export const setCloseType = type => ({
   type: constants.CLOSETYPE,
-  payload: id
+  payload: { closeType: type }
 });
 
 export const removeOnOpen = id => ({

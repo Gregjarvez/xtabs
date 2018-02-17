@@ -12,7 +12,6 @@ class IOEvent {
     this.limit = tabLimit;
     this.closeType = closeType;
     this.handler = new EventHandler(this);
-    this.unsubscribe = this.store.subscribe(this.handleChange);
 
     contextMenu
       .removePreviousMenu()
@@ -20,6 +19,8 @@ class IOEvent {
       .initialActionListener(context);
 
 
+    this.store.subscribe(this.onStoreChange);
+    this.handler.hydrateStoreonLoad();
     this.onTabCreate();
     this.queryTab(this.handler.closeMultipleOnExcess);
     this.setInitialBadgeStatus();
@@ -37,16 +38,17 @@ class IOEvent {
       .query({ currentWindow: true }, callBack);
   }
 
-  handleChange = () => {
-    const { tabLimit, closeType, tabs } = this.store.getState();
-    this.closeType = closeType;
+  onStoreChange = () => {
+    const { settings, tabs } = this.store.getState();
     this.handler.setBadgeNumber(tabs.length);
 
-    if (this.limit === tabLimit) {
-      return;
-    }
-    this.limit = tabLimit;
-    this.queryTab(this.handler.closeMultipleOnExcess);
+    this.limit = settings.tabLimit;
+    this.closeType = settings.closeType;
+
+    this.handler.setParamsToPersistantStorage({
+      closeType: this.closeType,
+      tabLimit: this.limit
+    });
   };
 
   setInitialBadgeStatus() {

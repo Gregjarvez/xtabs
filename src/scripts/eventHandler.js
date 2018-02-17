@@ -1,6 +1,5 @@
 import { extract, getTabInfo } from './utils';
-import { saveTabs } from '../events/actions/index';
-
+import { saveTabs, setLimit } from '../events/actions/index';
 
 class EventHandler {
   constructor(context) {
@@ -14,26 +13,33 @@ class EventHandler {
       }
       return this.closeOldestTab(tabs);
     }
-  };
+  }
 
   closeMultipleOnExcess = (tabs) => {
     if (tabs.length > this.context.limit) {
-      const tabinfo = tabs
-        .slice(0, (tabs.length - this.context.limit))
+      const tabinfo = tabs.slice(0, (tabs.length - this.context.limit))
         .map(getTabInfo);
 
       this.context.store.dispatch(saveTabs(tabinfo));
       chrome.tabs.remove(tabinfo.map(tab => tab.id));
     }
-  };
+  }
 
-  closeTab([tab]) {
-    const tabInfo = extract(
-      ['id', 'url', 'title', 'favIconUrl'],
-      tab
-    );
+  closeTab(tabs) {
+    const { store } = this.context;
+    const i = tabs.findIndex(tab => !tab.pinned && !tab.active);
+    const closable = tabs[i];
+    console.log(closable);
+
+    if (!closable) {
+      const limit = store.getState().settings.tabLimit + 1;
+      return store.dispatch(setLimit(limit));
+    }
+
+    const tabInfo = extract(['id', 'url', 'title', 'favIconUrl', 'pinned'], closable);
+
     this.context.store.dispatch(saveTabs(tabInfo));
-    chrome.tabs.remove(tabInfo.id);
+    return chrome.tabs.remove(tabInfo.id);
   }
 
   closeOldestTab(tabs) {
@@ -42,15 +48,25 @@ class EventHandler {
   }
 
   setBadgeNumber(num) {
-    return chrome
-      .browserAction
-      .setBadgeText({ text: `${num}` });
+    return chrome.browserAction.setBadgeText({ text: `${num}` });
   }
 
   setInitialBackground() {
-    chrome
-      .browserAction
-      .setBadgeBackgroundColor({ color: '#118AB2' });
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#118AB2' });
+  }
+
+  hydrateStoreonLoad() {
+    chrome.storage.local.get(['closeType', 'tabLimit'], (store) => {
+      this.context.store.dispatch({ type: 'HYDRATE', payload: store });
+    });
+  }
+
+  setParamsToPersistantStorage(params) {
+    chrome.storage.local.set(params, () => {
+      if (chrome.runtime.lastError) {
+        // todo store to a different storage momentarily
+      }
+    });
   }
 }
 

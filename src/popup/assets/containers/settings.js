@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { setLimit } from '../../../events/actions/index';
-import Button from '../components/button';
-import Gear from '../components/gear';
+import { Gear, Button } from '../components/commons';
 import Query from '../components/query';
 import Counter from '../components/counter';
 
@@ -15,7 +14,7 @@ class Setting extends PureComponent {
     };
   }
 
-  limitVisibility = () => {
+  toggleSettingPanel = () => {
     this.setState({ visible: true });
   };
 
@@ -25,19 +24,15 @@ class Setting extends PureComponent {
     this.props.setTabLimit(val);
   }
 
-  increment = () => {
-    return this.operator(val => val + 1);
-  }
+  increment = () => this.operator(val => val + 1);
 
-  decrement = () => {
-    return this.operator(val => val - 1);
-  }
+  decrement = () => this.operator(val => val - 1);
 
   render() {
     return (
       <div className="settings">
         { !this.state.visible &&
-          <Button buttonClassName="settingBtn" onclick={this.limitVisibility}>
+          <Button buttonClassName="settingBtn" onclick={this.toggleSettingPanel}>
             <Gear />
           </Button>
         }
@@ -59,7 +54,7 @@ class Setting extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  tabLimit: state.tabLimit
+  tabLimit: state.settings.tabLimit
 });
 const mapDispatchToProps = dispatch => ({
   setTabLimit: limit => dispatch(setLimit(limit))

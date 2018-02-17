@@ -1,5 +1,5 @@
 import constants from '../constants';
-import {onDelete, onSave, onFilter} from './helpers/tabReducers';
+import { onDelete, onSave } from './helpers/tabReducers';
 
 const tabs = (state = [], action) => {
   switch (action.type) {

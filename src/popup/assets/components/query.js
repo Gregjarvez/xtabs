@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeType } from '../../../events/actions';
+  import { setCloseType } from '../../../events/actions';
 
-const Query = (props) => {
+const Query = ({closeType, setCloseType }) => {
+  console.log(closeType)
   return (
     <form>
       <div className="form-heading">CLOSE</div>
@@ -12,8 +13,8 @@ const Query = (props) => {
             type="radio"
             id="oldest"
             name="close"
-            checked={props.closeType === 'oldest'}
-            onChange={() => props.setCloseType('oldest')}
+            checked={closeType === 'oldest'}
+            onChange={() => setCloseType('oldest')}
         />
         <label htmlFor="oldest" className="label">Oldest</label>
       </div>
@@ -22,8 +23,8 @@ const Query = (props) => {
             type="radio"
             id="left-most"
             name="close"
-            checked={props.closeType  === 'left-most'}
-            onChange={() => props.setCloseType('left-most')}
+            checked={closeType  === 'left-most'}
+            onChange={() => setCloseType('left-most')}
         />
         <label htmlFor="left-most" className="label">Left-most Tab</label>
       </div>
@@ -32,11 +33,11 @@ const Query = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  closeType: state.closeType
+  closeType: state.settings.closeType
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setCloseType: id => dispatch(closeType(id))
+  setCloseType: type => dispatch(setCloseType(type))
 })
 
 

@@ -5,6 +5,7 @@ const constants = {
   SETWORD: 'SETWORD',
   SETLIMIT: 'SETLIMIT',
   CLOSETYPE: 'CLOSETYPE',
-  REMOVE_ON_OPEN: 'REMOVE_ON_OPEN'
+  REMOVE_ON_OPEN: 'REMOVE_ON_OPEN',
+  HYDRATE: 'HYDRATE'
 };
 export default constants;

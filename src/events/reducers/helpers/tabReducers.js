@@ -1,3 +1,5 @@
+const payload = load => (Array.isArray(load) ? load : [load]);
+
 export const onDelete = (state = [], action) => {
   const update = [...state];
   update.splice(
@@ -7,7 +9,6 @@ export const onDelete = (state = [], action) => {
   return update;
 };
 export const onSave = (state = [], action) => {
-  const payload = load => (Array.isArray(load) ? load : [load]);
   return [
     ...payload(action.payload),
     ...state

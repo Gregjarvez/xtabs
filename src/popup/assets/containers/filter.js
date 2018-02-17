@@ -20,15 +20,11 @@ class SearchField extends Component {
   }
 }
 
-const mapStateToProps = state => (
-  { searchWord: state.searchWord }
-);
+const mapStateToProps = state => ({ searchWord: state.searchWord });
 
-const mapDispatchToProps = dispatch => (
-  {
-    setSearchWord: word => dispatch(setWord(word))
-  }
-);
+const mapDispatchToProps = dispatch => ({
+  setSearchWord: word => dispatch(setWord(word))
+});
 
 
 export default connect(
