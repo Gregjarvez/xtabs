@@ -25,7 +25,7 @@ const ContextMenu = {
 
   initialActionListener(backgroundEvents) {
     chrome.contextMenus.onClicked.addListener((info, tab) => {
-      backgroundEvents.handler.closeTab([tab]);
+      backgroundEvents.handler.closeTab([tab], info.menuItemId);
     });
   }
 };
