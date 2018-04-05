@@ -1,23 +1,12 @@
 import EventHandler from './eventHandler';
-import ContextMenu from '../scripts/contextMenu';
-
 
 class IOEvent {
   constructor(store) {
-    const contextMenu = Object.create(ContextMenu);
-    const context = this;
-
     this.store = store;
     const { closeType, tabLimit } = this.store.getState();
     this.limit = tabLimit;
     this.closeType = closeType;
     this.handler = new EventHandler(this);
-
-    contextMenu
-      .removePreviousMenu()
-      .installMenu()
-      .initialActionListener(context);
-
 
     this.store.subscribe(this.onStoreChange);
     this.handler.hydrateStoreonLoad();
